@@ -1,0 +1,17 @@
+[
+  {
+    "name": "e2e tests",
+    "unit": "Seconds",
+    "value": 550
+  },
+  {
+    "name": "unit tests",
+    "unit": "Seconds",
+    "value": 100
+  },
+  {
+    "name": "build",
+    "unit": "Seconds",
+    "value": 30
+  }
+]

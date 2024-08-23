@@ -44,8 +44,8 @@ jobs:
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:
-          tool: 'benchmarkjs'
-          output-file-path: benchmark_data.txt
+          tool: 'pytest'
+          output-file-path: benchmark_data.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           fail-on-alert: true

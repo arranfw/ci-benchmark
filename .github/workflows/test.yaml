@@ -1,5 +1,5 @@
 # https://vitejs.dev/guide/static-deploy
-name: Deploy static content to GH Pages
+name: Test PR Branch
 
 on:
   pull_request:
@@ -32,7 +32,7 @@ jobs:
           restore-keys: node-modules-${{ runner.os }}
 
       - name: current_time
-        uses: ./.github/workflows/workflow-2.yml
+        uses: ./.github/workflows/start_timer.yaml
 
       - name: Set install start timestamp
         id: install-start-time

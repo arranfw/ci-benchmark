@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1724430895636,
+  "lastUpdate": 1724430957570,
   "repoUrl": "https://github.com/arranfw/ci-benchmark",
   "entries": {
     "Benchmark": [
@@ -128,6 +128,45 @@ window.BENCHMARK_DATA = {
           {
             "name": "build",
             "value": 35,
+            "unit": "Seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "arran.woodruff@teamexos.com",
+            "name": "arranfw",
+            "username": "arranfw"
+          },
+          "committer": {
+            "email": "arran.woodruff@teamexos.com",
+            "name": "arranfw",
+            "username": "arranfw"
+          },
+          "distinct": true,
+          "id": "7616264b1d0b735144b7a2e03017ec281ae54f30",
+          "message": "use custom format, duh",
+          "timestamp": "2024-08-23T10:35:40-06:00",
+          "tree_id": "5d5f1071d509fd2bd43e277f68e175aa071b04cc",
+          "url": "https://github.com/arranfw/ci-benchmark/commit/7616264b1d0b735144b7a2e03017ec281ae54f30"
+        },
+        "date": 1724430957299,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "e2e tests",
+            "value": 320,
+            "unit": "Seconds"
+          },
+          {
+            "name": "unit tests",
+            "value": 110,
+            "unit": "Seconds"
+          },
+          {
+            "name": "build",
+            "value": 39,
             "unit": "Seconds"
           }
         ]

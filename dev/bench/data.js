@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1724442961062,
+  "lastUpdate": 1724443208465,
   "repoUrl": "https://github.com/arranfw/ci-benchmark",
   "entries": {
     "Benchmark": [
@@ -44,6 +44,31 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/arranfw/ci-benchmark/pull/1/commits/0970ae7e8febdc0c14d82afef12c1cefbf00fbcb"
         },
         "date": 1724442960805,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "test",
+            "value": "13",
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "arranfw",
+            "username": "arranfw"
+          },
+          "committer": {
+            "name": "arranfw",
+            "username": "arranfw"
+          },
+          "id": "0970ae7e8febdc0c14d82afef12c1cefbf00fbcb",
+          "message": "test branch behaviour",
+          "timestamp": "2024-08-23T19:12:55Z",
+          "url": "https://github.com/arranfw/ci-benchmark/pull/1/commits/0970ae7e8febdc0c14d82afef12c1cefbf00fbcb"
+        },
+        "date": 1724443208050,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

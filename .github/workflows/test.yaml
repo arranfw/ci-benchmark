@@ -1,10 +1,8 @@
 # https://vitejs.dev/guide/static-deploy
-name: Deploy static content to GH Pages
+name: Test PR Branch
 
 on:
-  push:
-    branches: ['main']
-
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -12,21 +10,13 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
-
 jobs:
-  deploy:
+  test:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Set start timestamp
-        id: start-time
-        run: |
-          printf 'timestamp=%(%s)T\n' >> "$GITHUB_OUTPUT"
       - name: Checkout
         uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -40,22 +30,37 @@ jobs:
           path: node_modules
           key: node-modules-${{ runner.os }}-${{ hashFiles('package.json') }}
           restore-keys: node-modules-${{ runner.os }}
+
+      - name: current_time
+        uses: ./.github/workflows/start_timer.yaml
+
+      - name: Set install start timestamp
+        id: install-start-time
+        run: |
+          printf 'install_start=%(%s)T\n' >> "$GITHUB_OUTPUT"
       - name: install dependencies
         run: bun install
-      - name: build
-        run: bun run build
+      - name: Set test start timestamp
+        id: test-start-time
+        run: |
+          printf 'test_start=%(%s)T\n' >> "$GITHUB_OUTPUT"
+      - name: test
+        run: bun run test
       - name: Download previous benchmark data
         uses: actions/cache@v4
         with:
           path: ./cache
           key: ${{ runner.os }}-benchmark
-      - name: Calculate duration
+      - name: Calculate durations
         run: |
           printf -v now '%(%s)T'
-          duration=$((now - ${{ steps.start-time.outputs.timestamp }}))
-          echo ${{ steps.start-time.outputs.timestamp }}
-          echo "$duration" >> bench.json
-          jq -n --arg duration $duration '[{"name": "deploy", "unit": "seconds", "value":$duration}]' | tee bench.json
+          install_duration=$((${{ steps.install-start-time.outputs.install_start }} - ${{ steps.test-start-time.outputs.test_start }}))
+          test_duration=$((now - ${{ steps.test-start-time.outputs.test_start }}))
+          echo "$install_duration"
+          echo "$test_duration"
+          test_json=$( jq -n --arg test_duration $test_duration '[{"name": "test", "unit": "seconds", "value":$test_duration}]' )
+          install_json=$( jq -n --arg install_duration $install_duration '[{"name": "install", "unit": "seconds", "value":$install_duration}]' )
+          jq -n --argjson test_json "$test_json" --argjson install_json "$install_json" '$test_json + $install_json' | tee bench.json
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:

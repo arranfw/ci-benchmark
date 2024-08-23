@@ -1,0 +1,27 @@
+on:
+  workflow_call:
+    inputs:
+      timer_name:
+        required: true
+        type: string
+    outputs:
+      start_time:
+        description: "Timestamp of the start of the job"
+        value: ${{ jobs.start_time.outputs.timer_start }}
+
+jobs:
+  start_time:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Get current timestamp
+        id: current_timestamp
+        run: echo "::set-output current_timestamp=date::$(date +'%S')"
+      - name: Set start timestamp
+        id: start-time
+        run: |
+          # printf 'install_start=%(%s)T\n'
+          echo ${{steps.date.outputs.date}}
+          # start_time_json=$( jq -n --arg test_duration $test_duration '[{"name": "test", "unit": "seconds", "value":$test_duration}]' )
+          # printf 'timer_start=' >> "$GITHUB_OUTPUT"

@@ -48,8 +48,9 @@ jobs:
       - name: Calculate duration
         run: |
           printf -v now '%(%s)T'
-          duration=$((now - ${{ steps.start.outputs.timestamp }}))
-          echo "duration=$duration" >> "$GITHUB_OUTPUT"
+          duration=$((now - ${{ steps.start-time.outputs.timestamp }}))
+          echo ${{ steps.start-time.outputs.timestamp }}
+          echo "$duration"
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:

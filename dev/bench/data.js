@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1724431185647,
+  "lastUpdate": 1724439395168,
   "repoUrl": "https://github.com/arranfw/ci-benchmark",
   "entries": {
     "Benchmark": [
@@ -140,6 +140,45 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/arranfw/ci-benchmark/commit/1b607e09f755d66134e6b8845421f6854752cd6e"
         },
         "date": 1724431185377,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "e2e tests",
+            "value": 350,
+            "unit": "Seconds"
+          },
+          {
+            "name": "unit tests",
+            "value": 120,
+            "unit": "Seconds"
+          },
+          {
+            "name": "build",
+            "value": 45,
+            "unit": "Seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "arran.woodruff@teamexos.com",
+            "name": "arranfw",
+            "username": "arranfw"
+          },
+          "committer": {
+            "email": "arran.woodruff@teamexos.com",
+            "name": "arranfw",
+            "username": "arranfw"
+          },
+          "distinct": true,
+          "id": "0a89a84746a075848e878770f32d7ce21f1eb6f7",
+          "message": "fix duration calculation",
+          "timestamp": "2024-08-23T12:56:03-06:00",
+          "tree_id": "9bc8860857695867d79a9bdb34a3598b5f4b1682",
+          "url": "https://github.com/arranfw/ci-benchmark/commit/0a89a84746a075848e878770f32d7ce21f1eb6f7"
+        },
+        "date": 1724439394327,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

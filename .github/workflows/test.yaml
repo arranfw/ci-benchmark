@@ -30,6 +30,10 @@ jobs:
           path: node_modules
           key: node-modules-${{ runner.os }}-${{ hashFiles('package.json') }}
           restore-keys: node-modules-${{ runner.os }}
+
+      - name: current_time
+        uses: ./.github/workflows/workflow-2.yml
+
       - name: Set install start timestamp
         id: install-start-time
         run: |

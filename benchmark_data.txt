@@ -1,0 +1,3 @@
+deffered.resolve() x 785 ops/sec ±0.47% (11 runs sampled)
+setImmediate() x 795 ops/sec ±0.23% (45 runs sampled)
+fs.readFile() x 590 ops/sec ±0.97% (74 runs sampled)

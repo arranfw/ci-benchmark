@@ -13,6 +13,8 @@ jobs:
   start_time:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Get current timestamp
         id: current_timestamp
         run: echo "::set-output current_timestamp=date::$(date +'%S')"

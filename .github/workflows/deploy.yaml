@@ -2,7 +2,9 @@
 name: Deploy static content to GH Pages
 
 on:
-  pull_request:
+  push:
+    branches: ['main']
+
   workflow_dispatch:
 
 permissions:
@@ -38,6 +40,10 @@ jobs:
           path: node_modules
           key: node-modules-${{ runner.os }}-${{ hashFiles('package.json') }}
           restore-keys: node-modules-${{ runner.os }}
+      - name: install dependencies
+        run: bun install
+      - name: build
+        run: bun run build
       - name: Download previous benchmark data
         uses: actions/cache@v4
         with:

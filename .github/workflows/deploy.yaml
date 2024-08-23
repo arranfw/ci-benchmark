@@ -23,6 +23,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Set start timestamp
+        id: start-time
+        run: |
+          printf 'timestamp=%(%s)T\n' >> "$GITHUB_OUTPUT"
       - name: Checkout
         uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -41,6 +45,11 @@ jobs:
         with:
           path: ./cache
           key: ${{ runner.os }}-benchmark
+      - name: Calculate duration
+        run: |
+          printf -v now '%(%s)T'
+          duration=$((now - ${{ steps.start.outputs.timestamp }}))
+          echo "duration=$duration" >> "$GITHUB_OUTPUT"
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:

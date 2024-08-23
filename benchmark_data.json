@@ -2,16 +2,16 @@
   {
     "name": "e2e tests",
     "unit": "Seconds",
-    "value": 550
+    "value": 520
   },
   {
     "name": "unit tests",
     "unit": "Seconds",
-    "value": 100
+    "value": 80
   },
   {
     "name": "build",
     "unit": "Seconds",
-    "value": 30
+    "value": 35
   }
 ]

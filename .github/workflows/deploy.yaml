@@ -50,12 +50,13 @@ jobs:
           printf -v now '%(%s)T'
           duration=$((now - ${{ steps.start-time.outputs.timestamp }}))
           echo ${{ steps.start-time.outputs.timestamp }}
-          echo "$duration"
+          echo "$duration" >> bench.json
+          jq -n --arg duration $duration '[{"name": "deploy", "unit": "seconds", "value":$duration}]' | tee bench.json
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:
           tool: 'customSmallerIsBetter'
-          output-file-path: benchmark_data.json
+          output-file-path: bench.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           fail-on-alert: true

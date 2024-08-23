@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:benchmark": "bun ./src/benchmark.ts \"build\" \"bun run build\"",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "bun test --timeout 10000"
+    "test": "bun test --timeout 10000",
+    "test:benchmark": "bun ./src/benchmark.ts \"unit_tests\" \"bun run test\""
   },
   "dependencies": {
     "lodash": "^4.17.21",

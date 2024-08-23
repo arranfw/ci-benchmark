@@ -1,32 +1,24 @@
 # https://vitejs.dev/guide/static-deploy
-name: Deploy static content to GH Pages
+name: CI PR Branch
 
 on:
+  pull_request:
+  workflow_dispatch:
   push:
     branches: ['main']
-
-  workflow_dispatch:
 
 permissions:
   contents: write
   pages: write
   id-token: write
 
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
-
 jobs:
-  deploy:
+  ci:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Set start timestamp
-        id: start-time
-        run: |
-          printf 'timestamp=%(%s)T\n' >> "$GITHUB_OUTPUT"
       - name: Checkout
         uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -40,27 +32,34 @@ jobs:
           path: node_modules
           key: node-modules-${{ runner.os }}-${{ hashFiles('package.json') }}
           restore-keys: node-modules-${{ runner.os }}
+
       - name: install dependencies
         run: bun install
-      - name: build
-        run: bun run build
+
+      - name: build project
+        run: bun build:benchmark
+
+      - name: run unit tests
+        run: bun run test:benchmark
+
       - name: Download previous benchmark data
         uses: actions/cache@v4
         with:
           path: ./cache
           key: ${{ runner.os }}-benchmark
-      - name: Calculate duration
-        run: |
-          printf -v now '%(%s)T'
-          duration=$((now - ${{ steps.start-time.outputs.timestamp }}))
-          echo ${{ steps.start-time.outputs.timestamp }}
-          echo "$duration" >> bench.json
-          jq -n --arg duration $duration '[{"name": "deploy", "unit": "seconds", "value":$duration}]' | tee bench.json
-      - name: Store benchmark result
+      - name: Store test benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:
           tool: 'customSmallerIsBetter'
-          output-file-path: bench.json
+          output-file-path: unit_tests_benchmark_data.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+          fail-on-alert: true
+      - name: Store build benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: 'customSmallerIsBetter'
+          output-file-path: build_benchmark_data.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           fail-on-alert: true

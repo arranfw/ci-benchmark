@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1724454462568,
+  "lastUpdate": 1724454501083,
   "repoUrl": "https://github.com/arranfw/ci-benchmark",
   "entries": {
     "Benchmark": [
@@ -182,6 +182,33 @@ window.BENCHMARK_DATA = {
           {
             "name": "build",
             "value": 1361,
+            "unit": "ms"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Arran Woodruff",
+            "username": "arranfw",
+            "email": "71518072+arranfw@users.noreply.github.com"
+          },
+          "committer": {
+            "name": "GitHub",
+            "username": "web-flow",
+            "email": "noreply@github.com"
+          },
+          "id": "a1031adb45793357e71b1bb7a7468804c22d7ff7",
+          "message": "Merge pull request #2 from arranfw/test-branch-2\n\ntest commit",
+          "timestamp": "2024-08-23T23:07:19Z",
+          "url": "https://github.com/arranfw/ci-benchmark/commit/a1031adb45793357e71b1bb7a7468804c22d7ff7"
+        },
+        "date": 1724454500815,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "unit_tests",
+            "value": 4382,
             "unit": "ms"
           }
         ]

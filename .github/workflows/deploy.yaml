@@ -53,7 +53,7 @@ jobs:
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:
-          tool: 'pytest'
+          tool: 'customSmallerIsBetter'
           output-file-path: benchmark_data.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true

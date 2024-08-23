@@ -1,25 +1,17 @@
-{
-  "benchmarks": [
-    {
-      "name": "e2e tests",
-      "unit": "Seconds",
-      "ops": {
-        "stat": 520
-      }
-    },
-    {
-      "name": "unit tests",
-      "unit": "Seconds",
-      "ops": {
-        "stat": 52800
-      }
-    },
-    {
-      "name": "build",
-      "unit": "Seconds",
-      "ops": {
-        "stat": 35
-      }
-    }
-  ]
-}
+[
+  {
+    "name": "e2e tests",
+    "unit": "Seconds",
+    "value": 320
+  },
+  {
+    "name": "unit tests",
+    "unit": "Seconds",
+    "value": 110
+  },
+  {
+    "name": "build",
+    "unit": "Seconds",
+    "value": 39
+  }
+]
